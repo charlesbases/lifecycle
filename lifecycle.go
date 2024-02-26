@@ -23,7 +23,7 @@ type Hook struct {
 
 // Lifecycle .
 type Lifecycle interface {
-	Append(h ...Hook)
+	Append(h Hook)
 	Start(ctx context.Context) error
 	Stop(ctx context.Context) error
 }
@@ -42,8 +42,8 @@ type lifecycle struct {
 }
 
 // Append adds a Hook to the lifecycle.
-func (l *lifecycle) Append(h ...Hook) {
-	l.hooks = append(l.hooks, h...)
+func (l *lifecycle) Append(h Hook) {
+	l.hooks = append(l.hooks, h)
 }
 
 // Start runs all OnStart hooks, returning immediately if it encounters an error
